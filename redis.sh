@@ -52,4 +52,4 @@ VALIDATE $? "Enabling Redis"
 systemctl start redis &>>$LOG_FILE
 VALIDATE $? "Started Redis"
 
-echo -e "Script exception completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee - $LOG_FILE
+echo -e "Script exception completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
