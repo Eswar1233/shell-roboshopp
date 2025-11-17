@@ -53,13 +53,13 @@ fi
 mkdir -p /app &>>$LOG_FILE
 VALIDATE $? "Creating app directory"
 
-curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>>$LOG_FILE
-VALIDATE $? "Downloading user"
+curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOG_FILE
+VALIDATE $? "Downloading cart"
 
 rm -rf /app/* #app directory lo unna content ni delete chestham
 cd /app  &>>$LOG_FILE
-unzip /tmp/user.zip &>>$LOG_FILE
-VALIDATE $? "unzipping user"
+unzip /tmp/cart.zip &>>$LOG_FILE
+VALIDATE $? "unzipping cart"
 
 cd /app &>>$LOG_FILE
 VALIDATE $? "Go to app directory"
@@ -67,13 +67,13 @@ VALIDATE $? "Go to app directory"
 npm install &>>$LOG_FILE
 VALIDATE $? "Install npm"
 
-cp $SCRIPT_DIR/user.service /etc/systemd/system/user.service &>>$LOG_FILE
-VALIDATE $? "copying user service"
+cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service &>>$LOG_FILE
+VALIDATE $? "copying cart service"
 
 systemctl daemon-reload &>>$LOG_FILE
-systemctl enable user &>>$LOG_FILE
-systemctl start user &>>$LOG_FILE
-VALIDATE $? "daemon reloaded, enabling user , starting user"
+systemctl enable cart &>>$LOG_FILE
+systemctl start cart &>>$LOG_FILE
+VALIDATE $? "daemon reloaded, enabling cart , starting cart"
 
 cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>$LOG_FILE
 VALIDATE $? "copying mongo repo"
