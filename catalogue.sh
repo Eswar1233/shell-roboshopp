@@ -56,7 +56,7 @@ VALIDATE $? "Creating app directory"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading catalogue"
 
-rm -rf /app/*
+rm -rf /app/* #app directory lo unna content ni delete chestham
 cd /app  &>>$LOG_FILE
 unzip /tmp/catalogue.zip &>>$LOG_FILE
 VALIDATE $? "unzipping catalogue"
@@ -81,5 +81,11 @@ VALIDATE $? "copying mongo repo"
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "installing Mongodb client"
 
-mongosh --host mongodb.squareladdu.in </app/db/master-data.js &>>$LOG_FILE
-VALIDATE $? "loading master data into MongoDB"
+STATUS=$(mongosh --host mongodb.squareladdu.in --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+if [ $STATUS -lt 0 ]
+then
+    mongosh --host mongodb.squareladdu.in </app/db/master-data.js &>>$LOG_FILE
+    VALIDATE $? "loading master data into MongoDB"
+else
+    echo -e "Data is alreacdy loaded ... $Y SKIPPING $N"
+fi
