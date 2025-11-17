@@ -4,7 +4,7 @@
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-06d806d4818b5c861"
 # SUBNET_ID="subnet-069fb883317c20484" #it is taken as default
-INSTANCES=("catalogue")
+INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "user" "cart" "shipping" "payment" "dispatch" "frontend" "catalogue")
 ZONE_ID="Z1011474241AR8ZUHCM8Y" # present in route 53
 DOMAIN_NAME="squareladdu.in" # present in route 53
 
