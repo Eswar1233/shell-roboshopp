@@ -61,9 +61,6 @@ cd /app  &>>$LOG_FILE
 unzip /tmp/cart.zip &>>$LOG_FILE
 VALIDATE $? "unzipping cart"
 
-cd /app &>>$LOG_FILE
-VALIDATE $? "Go to app directory"
-
 npm install &>>$LOG_FILE
 VALIDATE $? "Install npm"
 
@@ -74,12 +71,6 @@ systemctl daemon-reload &>>$LOG_FILE
 systemctl enable cart &>>$LOG_FILE
 systemctl start cart &>>$LOG_FILE
 VALIDATE $? "daemon reloaded, enabling cart , starting cart"
-
-cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>$LOG_FILE
-VALIDATE $? "copying mongo repo"
-
-dnf install mongodb-mongosh -y &>>$LOG_FILE
-VALIDATE $? "installing Mongodb client"
 
 END_TIME=$(date +%s)
 TOTAL_TIME=$(( $END_TIME - $START_TIME))
