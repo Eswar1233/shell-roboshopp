@@ -6,7 +6,7 @@ app_name=catalogue
 check_root
 app_setup
 nodejs_setup
-system_desetup
+systemd_setup
 
 cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>$LOG_FILE
 VALIDATE $? "copying mongo repo"

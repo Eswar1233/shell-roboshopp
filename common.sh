@@ -33,9 +33,6 @@ app_setup(){
     cd /app  &>>$LOG_FILE
     unzip /tmp/$app_name.zip &>>$LOG_FILE
     VALIDATE $? "unzipping $app_name"
-
-    cd /app &>>$LOG_FILE
-    VALIDATE $? "Go to app directory"
 }
 
 nodejs_setup(){
@@ -52,7 +49,7 @@ nodejs_setup(){
     VALIDATE $? "Install npm"
 }
 
-system_desetup(){
+systemd_setup(){
   cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service &>>$LOG_FILE
   VALIDATE $? "copying $app_name service"
 
